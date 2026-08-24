@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Island PIP</title>
+    <link rel="stylesheet" href="island.css">
+    <link rel="stylesheet" href="customization.css">
+</head>
+<body>
+    <div class="island-wrapper" id="islandWrapper">
+        <div class="dynamic-island" id="island">
+            <!-- Far Left Edge: Animation Loader Avatar FIRST -->
+            <div class="island-avatar" id="islandAvatar" title="Visara Eye Care">
+                <!-- 1. Compass Gyro Loader -->
+                <svg class="pl-loader" id="compassAnim" viewBox="0 0 160 160" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#000" />
+                            <stop offset="100%" stop-color="#fff" />
+                        </linearGradient>
+                        <mask id="mask1">
+                            <rect x="0" y="0" width="160" height="160" fill="url(#grad)" />
+                        </mask>
+                    </defs>
+                    <g>
+                        <g class="pl__ring-rotate">
+                            <circle class="pl__ring-stroke" cx="80" cy="80" r="72" fill="none" stroke="hsl(223,90%,55%)" stroke-width="16" stroke-dasharray="452.39 452.39" stroke-dashoffset="452" stroke-linecap="round" transform="rotate(-45,80,80)" />
+                        </g>
+                    </g>
+                </svg>
+
+                <!-- 2. Running Hamster Wheel Loader -->
+                <div aria-label="Hamster running in wheel" role="img" class="wheel-and-hamster" id="hamsterAnim">
+                    <div class="wheel"></div>
+                    <div class="hamster">
+                        <div class="hamster__body">
+                            <div class="hamster__head">
+                                <div class="hamster__ear"></div>
+                                <div class="hamster__eye"></div>
+                                <div class="hamster__nose"></div>
+                            </div>
+                            <div class="hamster__limb hamster__limb--fr"></div>
+                            <div class="hamster__limb hamster__limb--fl"></div>
+                            <div class="hamster__limb hamster__limb--br"></div>
+                            <div class="hamster__limb hamster__limb--bl"></div>
+                            <div class="hamster__tail"></div>
+                        </div>
+                    </div>
+                    <div class="spoke"></div>
+                </div>
+
+                <!-- 3. Pulse Wave Loader -->
+                <div class="pulse-wave-anim" id="pulseAnim" style="display: none;">
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-core"></div>
+                </div>
+
+                <!-- 4. Orbiter Dots Loader -->
+                <div class="orbiter-anim" id="orbiterAnim" style="display: none;">
+                    <div class="orbiter-dot d1"></div>
+                    <div class="orbiter-dot d2"></div>
+                </div>
+
+                <!-- 5. Animated Pencil Loader -->
+                <svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 200 200" class="pencil" id="pencilAnim" style="display: none; color: #3b82f6;">
+                    <defs>
+                        <clipPath id="pencil-eraser">
+                            <rect height="30" width="30" ry="5" rx="5" />
+                        </clipPath>
+                    </defs>
+                    <circle transform="rotate(-113,100,100)" stroke-linecap="round" stroke-dashoffset="439.82" stroke-dasharray="439.82 439.82" stroke-width="6" stroke="#3b82f6" fill="none" r="70" class="pencil__stroke" />
+                    <g transform="translate(100,100)" class="pencil__rotate">
+                        <g fill="none">
+                            <circle transform="rotate(-90)" stroke-dashoffset="402" stroke-dasharray="402.12 402.12" stroke-width="30" stroke="hsl(223,90%,50%)" r="64" class="pencil__body1" />
+                            <circle transform="rotate(-90)" stroke-dashoffset="465" stroke-dasharray="464.96 464.96" stroke-width="10" stroke="hsl(223,90%,60%)" r="74" class="pencil__body2" />
+                            <circle transform="rotate(-90)" stroke-dashoffset="339" stroke-dasharray="339.29 339.29" stroke-width="10" stroke="hsl(223,90%,40%)" r="54" class="pencil__body3" />
+                        </g>
+                        <g transform="rotate(-90) translate(49,0)" class="pencil__eraser">
+                            <g class="pencil__eraser-skew">
+                                <rect fill="hsl(223,90%,70%)" height="30" width="30" ry="5" rx="5" />
+                                <rect fill="hsl(223,10%,90%)" height="30" width="5" />
+                                <rect fill="hsl(223,10%,70%)" height="30" width="30" clip-path="url(#pencil-eraser)" />
+                            </g>
+                        </g>
+                        <g transform="rotate(-90) translate(49,-30)" class="pencil__point">
+                            <polygon fill="hsl(33,90%,70%)" points="15 0,30 30,0 30" />
+                            <polygon fill="hsl(223,90%,20%)" points="15 0,20 10,10 10" />
+                        </g>
+                    </g>
+                </svg>
+
+                <!-- 6. Pokeball Bounce Loader -->
+                <div class="pokeball-loader" id="pokeballAnim" style="display: none;"></div>
+
+                <!-- 7. Radar Sweep Loader -->
+                <div class="radar-loader" id="radarAnim" style="display: none;">
+                    <span></span>
+                </div>
+
+                <!-- 8. Infinity Loop Loader -->
+                <div class="infinity-loader" id="infinityAnim" style="display: none;">
+                    <svg viewBox="0 0 100 50" width="22" height="12" class="infinity-svg">
+                        <path stroke="#ec4899" stroke-width="8" fill="none" stroke-linecap="round" d="M 20,25 C 20,10 40,10 50,25 C 60,40 80,40 80,25 C 80,10 60,10 50,25 C 40,40 20,40 20,25 Z" class="infinity-path" />
+                    </svg>
+                </div>
+
+                <!-- 9. Conic Orbit Loader -->
+                <div class="conic-loader" id="conicAnim" style="display: none;"></div>
+
+                <!-- 10. Morphing Diamond Loader -->
+                <div class="diamond-loader" id="diamondAnim" style="display: none;"></div>
+
+                <!-- 11. Tachometer Gauge Loader (From Uiverse.io by Nawsome) -->
+                <!-- 11. Tachometer Gauge Loader -->
+                <svg class="tacho-loader" viewBox="0 0 160 160" width="22" height="22" id="monsterAnim" style="display: none;" xmlns="http://www.w3.org/2000/svg">
+                    <g class="tacho__ring-rotate">
+                        <circle class="tacho__ring-stroke" cx="80" cy="80" r="72" fill="none" stroke="#00b4d8" stroke-width="16" stroke-dasharray="452.39 452.39" stroke-dashoffset="452" stroke-linecap="round" transform="rotate(-45,80,80)"></circle>
+                    </g>
+                    <g stroke-width="4" stroke-dasharray="12 12" stroke-dashoffset="12" stroke-linecap="round" transform="translate(80,80)">
+                        <polyline class="tacho__tick" stroke="hsl(223,10%,90%)" points="0,2 0,14" transform="rotate(-135,0,0) translate(0,40)"></polyline>
+                        <polyline class="tacho__tick" stroke="hsl(223,10%,90%)" points="0,2 0,14" transform="rotate(-90,0,0) translate(0,40)"></polyline>
+                        <polyline class="tacho__tick" stroke="hsl(223,10%,90%)" points="0,2 0,14" transform="rotate(-45,0,0) translate(0,40)"></polyline>
+                        <polyline class="tacho__tick" stroke="hsl(223,10%,90%)" points="0,2 0,14" transform="rotate(0,0,0) translate(0,40)"></polyline>
+                        <polyline class="tacho__tick" stroke="hsl(223,10%,90%)" points="0,2 0,14" transform="rotate(45,0,0) translate(0,40)"></polyline>
+                        <polyline class="tacho__tick" stroke="hsl(223,10%,90%)" points="0,2 0,14" transform="rotate(90,0,0) translate(0,40)"></polyline>
+                        <polyline class="tacho__tick" stroke="hsl(223,10%,90%)" points="0,2 0,14" transform="rotate(135,0,0) translate(0,40)"></polyline>
+                        <polyline class="tacho__tick" stroke="hsl(223,10%,90%)" points="0,2 0,14" transform="rotate(180,0,0) translate(0,40)"></polyline>
+                    </g>
+                    <g transform="translate(64,28)">
+                        <g class="tacho__arrows" transform="rotate(45,16,52)">
+                            <path fill="#f1f5f9" d="M17.998,1.506l13.892,43.594c.455,1.426-.56,2.899-1.998,2.899H2.108c-1.437,0-2.452-1.473-1.998-2.899L14.002,1.506c.64-2.008,3.356-2.008,3.996,0Z"></path>
+                            <path fill="#ff4c5a" d="M14.009,102.499L.109,58.889c-.453-1.421,.559-2.889,1.991-2.889H29.899c1.433,0,2.444,1.468,1.991,2.889l-13.899,43.61c-.638,2.001-3.345,2.001-3.983,0Z"></path>
+                        </g>
+                    </g>
+                </svg>
+
+                <!-- 12. Blazing Fire Loader (From Uiverse.io by Admin12121) -->
+                <div class="fire-loader" id="fireAnim" style="display: none;">
+                    <div class="fire">
+                        <div class="fire-left">
+                            <div class="main-fire"></div>
+                            <div class="particle-fire"></div>
+                        </div>
+                        <div class="fire-center">
+                            <div class="main-fire"></div>
+                            <div class="particle-fire"></div>
+                        </div>
+                        <div class="fire-right">
+                            <div class="main-fire"></div>
+                            <div class="particle-fire"></div>
+                        </div>
+                        <div class="fire-bottom">
+                            <div class="main-fire"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. Valorant Shard Loader (From Uiverse.io by Itskrish01) -->
+                <div class="valorant-loader" id="valorantAnim" style="display: none;">
+                    <div class="loader">
+                        <div class="pattern-1">
+                            <div class="pattern-1-shade"></div>
+                        </div>
+                        <div class="pattern-2"></div>
+                    </div>
+                </div>
+
+                <!-- 14. Sunny Cloud Loader -->
+                <div class="suncloud-loader" id="suncloudAnim" style="display: none;">
+                    <div class="container">
+                        <div class="cloud front">
+                            <span class="left-front"></span>
+                            <span class="right-front"></span>
+                        </div>
+                        <span class="sun sunshine"></span>
+                        <span class="sun"></span>
+                        <div class="cloud back">
+                            <span class="left-back"></span>
+                            <span class="right-back"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Far Right Edge Group: Hover Controls + Sky Blue Timer SECONDARY -->
+            <div class="island-right-group" id="timerRightGroup">
+                <div class="extra-controls" id="extraControls">
+                    <button class="island-btn-add" id="islandAdd5m" title="Add +5m work time">+5m</button>
+                    <button class="island-btn-icon" id="islandRestBtn" title="Rest Break Now">
+                        <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83"></path></svg>
+                    </button>
+                    <button class="island-btn-play" id="islandToggleBtn" title="Play/Pause">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffffff" id="islandPlayIcon" style="color: #ffffff;">
+                            <rect x="6" y="5" width="3" height="14" rx="1"></rect>
+                            <rect x="15" y="5" width="3" height="14" rx="1"></rect>
+                        </svg>
+                    </button>
+                    <button class="island-btn-icon dismiss" id="islandCloseBtn" title="Dismiss Dynamic Island">
+                        <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Far Right Edge: Sky Blue Countdown Timer SECONDARY -->
+                <div class="island-timer" id="islandTimer">20:00</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="island.js"></script>
+</body>
+</html>

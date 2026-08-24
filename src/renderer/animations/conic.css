@@ -1,0 +1,12 @@
+/* Animation 9: Conic Orbit Loader */
+.conic-loader {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: conic-gradient(white, #60a5fa, #1e3a8a, transparent 65%);
+    animation: conicSpin 1s linear infinite;
+}
+
+@keyframes conicSpin {
+    to { transform: rotate(360deg); }
+}

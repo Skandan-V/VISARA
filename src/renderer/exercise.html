@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest Mode - Visara</title>
+    <link rel="stylesheet" href="exercise.css">
+</head>
+<body>
+
+    <header>
+        <div class="title-group">
+            <span class="title-count" style="color: var(--accent-green); font-size: 16px; font-weight: 600;">Rest Mode</span>
+        </div>
+        <div class="rest-timer-top" id="restTimerDisplay">00:20</div>
+    </header>
+
+    <div class="section-divider"></div>
+
+    <main>
+        <div class="exercise-title" id="exerciseTitle">Far Gaze Focus (20-20-20 Rule)</div>
+        <div class="exercise-desc" id="exerciseDesc">Look at an object at least 20 feet (6 meters) away to completely relax your inner eye focusing lens.</div>
+
+        <div class="canvas-container">
+            <canvas id="exerciseCanvas" width="320" height="320"></canvas>
+        </div>
+
+        <div class="exercise-steps" id="stepIndicators">
+            <div class="step-indicator active"></div>
+            <div class="step-indicator"></div>
+            <div class="step-indicator"></div>
+            <div class="step-indicator"></div>
+        </div>
+    </main>
+
+    <footer>
+        <button class="btn-pill secondary" id="btnSnooze">Snooze 5m</button>
+        <button class="btn-pill secondary" id="btnSkip">Skip Break</button>
+        <button class="btn-pill" id="btnComplete">Done & Resume</button>
+    </footer>
+
+    <script src="../audio.js"></script>
+    <script src="exercise.js"></script>
+</body>
+</html>

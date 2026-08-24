@@ -1,0 +1,38 @@
+/* Animation 10: Morphing Diamond Loader */
+.diamond-loader {
+    width: 14px;
+    height: 14px;
+    background: #ff6b6b;
+    position: relative;
+    box-sizing: border-box;
+    animation: diamondSpin 1.2s linear infinite;
+}
+
+.diamond-loader::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0;
+    transform: rotate(45deg);
+    background: #ff3d3d;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.diamond-loader::after {
+    content: '';
+    box-sizing: border-box;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #ff6b6b;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+@keyframes diamondSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

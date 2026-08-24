@@ -1,0 +1,38 @@
+/* Animation 4: Orbiter Dots Loader */
+.orbiter-anim {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: orbiterRotate 1.4s linear infinite;
+}
+
+.orbiter-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.orbiter-dot.d1 {
+    background: #38bdf8;
+    top: 2px;
+    box-shadow: 0 0 6px #38bdf8;
+}
+
+.orbiter-dot.d2 {
+    background: #a855f7;
+    bottom: 2px;
+    box-shadow: 0 0 6px #a855f7;
+}
+
+@keyframes orbiterRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

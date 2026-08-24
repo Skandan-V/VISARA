@@ -1,0 +1,141 @@
+/* Animation 11: Tachometer Gauge Loader (From Uiverse.io by Nawsome / Itskrish01) */
+svg.pl,
+svg.tacho-loader {
+    display: block;
+    width: 22px;
+    height: 22px;
+}
+
+svg.pl circle,
+svg.tacho-loader circle,
+svg.pl polyline,
+svg.tacho-loader polyline,
+svg.pl path,
+svg.tacho-loader path {
+    stroke: revert !important;
+    fill: revert !important;
+}
+
+.pl__arrows,
+.pl__ring-rotate,
+.pl__ring-stroke,
+.pl__tick,
+.tacho__arrows,
+.tacho__ring-rotate,
+.tacho__ring-stroke,
+.tacho__tick {
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.pl__arrows,
+.tacho__arrows {
+    animation-name: tachoArrows42;
+    transform: rotate(45deg);
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+}
+
+.pl__ring-rotate,
+.pl__ring-stroke,
+.tacho__ring-rotate,
+.tacho__ring-stroke {
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+}
+
+.pl__ring-rotate,
+.tacho__ring-rotate {
+    animation-name: tachoRingRotate42;
+}
+
+.pl__ring-stroke,
+.tacho__ring-stroke {
+    animation-name: tachoRingStroke42;
+    transform: rotate(-45deg);
+}
+
+.pl__tick,
+.tacho__tick {
+    animation-name: tachoTick42;
+}
+
+.pl__tick:nth-child(2),
+.tacho__tick:nth-child(2) {
+    animation-delay: -1.75s;
+}
+
+.pl__tick:nth-child(3),
+.tacho__tick:nth-child(3) {
+    animation-delay: -1.5s;
+}
+
+.pl__tick:nth-child(4),
+.tacho__tick:nth-child(4) {
+    animation-delay: -1.25s;
+}
+
+.pl__tick:nth-child(5),
+.tacho__tick:nth-child(5) {
+    animation-delay: -1s;
+}
+
+.pl__tick:nth-child(6),
+.tacho__tick:nth-child(6) {
+    animation-delay: -0.75s;
+}
+
+.pl__tick:nth-child(7),
+.tacho__tick:nth-child(7) {
+    animation-delay: -0.5s;
+}
+
+.pl__tick:nth-child(8),
+.tacho__tick:nth-child(8) {
+    animation-delay: -0.25s;
+}
+
+/* Animations */
+@keyframes tachoArrows42 {
+    from {
+        transform: rotate(45deg);
+    }
+    to {
+        transform: rotate(405deg);
+    }
+}
+
+@keyframes tachoRingRotate42 {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes tachoRingStroke42 {
+    from,
+    to {
+        stroke-dashoffset: 452;
+        transform: rotate(-45deg);
+    }
+    50% {
+        stroke-dashoffset: 169.5;
+        transform: rotate(-180deg);
+    }
+}
+
+@keyframes tachoTick42 {
+    from,
+    3%,
+    47%,
+    to {
+        stroke-dashoffset: -12;
+    }
+    14%,
+    36% {
+        stroke-dashoffset: 0;
+    }
+}

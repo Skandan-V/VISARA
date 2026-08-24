@@ -1,0 +1,17 @@
+/* Animation 8: Infinity Loop Loader */
+.infinity-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.infinity-loader .infinity-path {
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: infinityDash 1.6s linear infinite;
+}
+
+@keyframes infinityDash {
+    0% { stroke-dashoffset: 220; }
+    100% { stroke-dashoffset: 0; }
+}

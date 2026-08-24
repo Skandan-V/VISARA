@@ -1,0 +1,47 @@
+/* Animation 3: Pulse Wave Loader */
+.pulse-wave-anim {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pulse-ring {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(52, 199, 89, 0.4);
+    animation: pulseRing 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.pulse-core {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #34c759;
+    box-shadow: 0 0 8px rgba(52, 199, 89, 0.8);
+    animation: pulseCore 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(0.6);
+        opacity: 0.9;
+    }
+    80%, 100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+@keyframes pulseCore {
+    0%, 100% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}

@@ -1,0 +1,90 @@
+{
+  "name": "visara",
+  "version": "1.0.0",
+  "description": "Desktop Eye Move Timer & Guided Ocular Wellness Assistant",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Skandan-V/VISARA.git"
+  },
+  "homepage": "https://github.com/Skandan-V/VISARA#readme",
+  "bugs": {
+    "url": "https://github.com/Skandan-V/VISARA/issues"
+  },
+  "author": "Skandan V <skandanv.is.dev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux",
+    "dist:all": "electron-builder -mwl"
+  },
+  "build": {
+    "appId": "com.hyperdyn.visara",
+    "productName": "Visara",
+    "copyright": "Copyright © 2026 Skandan V (Hyperdyn)",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "cscLink": "assets/visara_codesign.pfx",
+      "cscKeyPassword": "Visara2026"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "assets/icon.png",
+      "category": "public.app-category.lifestyle"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "assets/icon.png",
+      "category": "Utility"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Visara",
+      "license": "LICENSE",
+      "include": "installer.nsh"
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^26.15.3"
+  },
+  "dependencies": {
+    "firebase": "^12.18.0"
+  }
+}

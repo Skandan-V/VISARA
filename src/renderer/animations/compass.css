@@ -1,0 +1,64 @@
+/* Animation 1: Compass Gyro Animations */
+.pl-loader {
+    display: block;
+    width: 22px;
+    height: 22px;
+}
+
+.pl-loader path,
+.pl-loader circle,
+.pl-loader polyline,
+.pl-loader rect {
+    stroke: revert;
+    fill: revert;
+}
+
+.pl__arrows,
+.pl__ring-rotate,
+.pl__ring-stroke,
+.pl__tick {
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.pl__arrows {
+    animation-name: arrows42;
+    transform: rotate(45deg);
+    transform-origin: 16px 52px;
+}
+
+.pl__ring-rotate,
+.pl__ring-stroke {
+    transform-origin: 80px 80px;
+}
+
+.pl__ring-rotate {
+    animation-name: ringRotate42;
+}
+
+.pl__ring-stroke {
+    animation-name: ringStroke42;
+    transform: rotate(-45deg);
+}
+
+@keyframes arrows42 {
+    from { transform: rotate(45deg); }
+    to { transform: rotate(405deg); }
+}
+
+@keyframes ringRotate42 {
+    from { transform: rotate(0); }
+    to { transform: rotate(720deg); }
+}
+
+@keyframes ringStroke42 {
+    from, to {
+        stroke-dashoffset: 452;
+        transform: rotate(-45deg);
+    }
+    50% {
+        stroke-dashoffset: 169.5;
+        transform: rotate(-180deg);
+    }
+}

@@ -1,0 +1,204 @@
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./fonts/poppins-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('./fonts/poppins-500.woff2') format('woff2');
+}
+
+:root {
+    --bg: #ffffff;
+    --text-primary: #000000;
+    --text-secondary: #8e8e8e;
+    --text-error: #ff3b30;
+    --border: #f2f2f2;
+    --accent-green: #34c759;
+    --shadow: 0 4px 20px rgba(0,0,0,0.04);
+    --radius: 12px;
+    --font-timer: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+    height: 0px;
+    background: transparent;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+header {
+    padding: 20px 28px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-app-region: drag;
+    background: var(--bg);
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.title-arrow {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.title-count {
+    color: var(--accent-green);
+    font-weight: 500;
+}
+
+.rest-timer-top {
+    font-family: var(--font-timer) !important;
+    font-size: 32px;
+    font-weight: 500 !important;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -1px;
+    color: var(--text-primary);
+}
+
+.section-divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 0 28px 16px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 28px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.exercise-title {
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 500;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+.exercise-desc {
+    font-size: clamp(13px, 1.8vw, 15px);
+    color: var(--text-secondary);
+    max-width: 520px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    font-weight: 400;
+}
+
+/* Fluid Canvas Container */
+.canvas-container {
+    width: min(340px, 38vh);
+    height: min(340px, 38vh);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fafafa;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.exercise-steps {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.step-indicator {
+    height: 4px;
+    width: 32px;
+    background: var(--border);
+    border-radius: 2px;
+    transition: background 0.3s ease, width 0.3s ease;
+}
+
+.step-indicator.active {
+    background: var(--text-primary);
+    width: 48px;
+}
+
+/* Footer Control Actions (Exact design.html pill styling) */
+footer {
+    padding: 20px 28px 32px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    -webkit-app-region: no-drag;
+}
+
+.btn-pill {
+    background: var(--text-primary);
+    color: var(--bg);
+    border: none;
+    border-radius: 20px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn-pill:hover {
+    opacity: 0.9;
+}
+
+.btn-pill:active {
+    transform: scale(0.96);
+}
+
+.btn-pill.secondary {
+    background: var(--border);
+    color: var(--text-primary);
+}
