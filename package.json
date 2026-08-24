@@ -50,9 +50,7 @@
           ]
         }
       ],
-      "icon": "assets/icon.ico",
-      "cscLink": "assets/visara_codesign.pfx",
-      "cscKeyPassword": "Visara2026"
+      "icon": "assets/icon.ico"
     },
     "mac": {
       "target": [
