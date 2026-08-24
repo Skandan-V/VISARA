@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visara — Desktop Eye Care & Ocular Wellness</title>
+    <meta name="description" content="An intelligent desktop companion for healthy eyes. Automated 20-20-20 timers, calming audio, and floating widgets.">
+    
+    <!-- Open Graph / Meta -->
+    <meta property="og:title" content="Visara — Desktop Eye Move Timer & Rest Assistant">
+    <meta property="og:description" content="Prevent digital eye strain with intelligent 20-20-20 timers, guided exercises, procedural harmonic chimes, and dynamic island overlays.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts: Plus Jakarta Sans & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #F7F7F8;
+            --surface: #FFFFFF;
+            --text: #1E1B24;
+            --text-soft: #79767E;
+            --accent: #007AFF;
+            --accent-soft: rgba(0, 122, 255, 0.08);
+            --green: #34C759;
+            --border: #E8E8EC;
+            --border-dark: #27272A;
+            --radius-lg: 8px;
+            --radius-pill: 999px;
+            --transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            box-shadow: none !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 18px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(247, 247, 248, 0.88);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            font-size: 19px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo-img {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-soft);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 20px 60px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .hero-app-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: #FFFFFF;
+            padding: 4px;
+        }
+
+        .tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--surface);
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            margin-bottom: 22px;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .tagline-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--green);
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 60px;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+            margin-bottom: 18px;
+            color: var(--text);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-soft);
+            max-width: 580px;
+            margin: 0 auto 32px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius-pill);
+            font-size: 14.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--text);
+            color: #FFFFFF;
+            border-color: var(--text);
+        }
+
+        .btn-primary:hover {
+            background: #000000;
+            border-color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: #F4F4F6;
+            border-color: #D4D4D8;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Download Container */
+        .download-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn-download-split {
+            display: inline-flex;
+            align-items: center;
+            border-radius: var(--radius-pill);
+            background: var(--text);
+            color: #FFFFFF;
+            border: 1px solid var(--text);
+            overflow: hidden;
+        }
+
+        .btn-download-split:hover {
+            background: #000000;
+            border-color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .download-main-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 14.5px;
+            font-weight: 600;
+        }
+
+        .download-caret-btn {
+            background: transparent;
+            border: none;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 12px 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .download-caret-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .download-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: 250px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px;
+            z-index: 1000;
+            text-align: left;
+        }
+
+        .download-menu.show {
+            display: block;
+        }
+
+        .download-menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .download-menu-item:hover {
+            background: #F4F4F6;
+            color: var(--accent);
+        }
+
+        .download-menu-item .os-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-menu-item .os-badge {
+            font-size: 11px;
+            color: var(--text-soft);
+            background: var(--bg);
+            padding: 2px 7px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        /* Features Grid - Clean Content-Hugging Cards */
+        .features {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 20px 24px 80px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 32px 36px;
+            position: relative;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card:hover {
+            border-color: #D1D5DB;
+            transform: translateY(-3px);
+        }
+
+        .card-full {
+            grid-column: span 2;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+            line-height: 1.25;
+        }
+
+        .card p {
+            color: var(--text-soft);
+            font-size: 14.5px;
+            line-height: 1.55;
+            max-width: 440px;
+        }
+
+        /* Sound Preview Chips with SVG Icons */
+        .sound-chip-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .sound-chip {
+            padding: 7px 14px;
+            border-radius: var(--radius-pill);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .sound-chip svg {
+            width: 13px;
+            height: 13px;
+            stroke-width: 2.2;
+        }
+
+        .sound-chip:hover, .sound-chip.active {
+            background: var(--text);
+            color: #FFFFFF;
+            border-color: var(--text);
+        }
+
+        .sound-chip:hover svg, .sound-chip.active svg {
+            stroke: #FFFFFF;
+        }
+
+        /* ==========================================================================
+           Real CSS Animations From the App (Showcase Pills)
+           ========================================================================== */
+        .anim-showcase-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .anim-pill {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            padding: 7px 14px 7px 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text);
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .anim-pill:hover {
+            border-color: #CBD5E1;
+            background: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .anim-pill-badge {
+            width: 24px;
+            height: 24px;
+            background: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        /* 1. Compass Gyro Animation */
+        .pl-loader {
+            display: block;
+            width: 16px;
+            height: 16px;
+        }
+        .pl__ring-rotate, .pl__ring-stroke {
+            transform-origin: 80px 80px;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        .pl__ring-rotate { animation-name: ringRotate42; }
+        .pl__ring-stroke { animation-name: ringStroke42; transform: rotate(-45deg); }
+        @keyframes ringRotate42 { from { transform: rotate(0); } to { transform: rotate(720deg); } }
+        @keyframes ringStroke42 {
+            from, to { stroke-dashoffset: 452; transform: rotate(-45deg); }
+            50% { stroke-dashoffset: 169.5; transform: rotate(-180deg); }
+        }
+
+        /* 2. Pulse Wave Animation */
+        .pulse-wave-anim {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pulse-ring {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgba(52, 199, 89, 0.4);
+            animation: pulseRing 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        .pulse-core {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #34c759;
+            animation: pulseCore 1.8s ease-in-out infinite;
+        }
+        @keyframes pulseRing {
+            0% { transform: scale(0.6); opacity: 0.9; }
+            80%, 100% { transform: scale(1.4); opacity: 0; }
+        }
+        @keyframes pulseCore {
+            0%, 100% { transform: scale(0.9); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* 3. Radar Sweep Animation */
+        .radar-loader {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .radar-loader span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            transform-origin: top left;
+            animation: radar81 2s linear infinite;
+            border-top: 1px dashed #fff;
+        }
+        .radar-loader span::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fc5185;
+            transform-origin: top left;
+            transform: rotate(-55deg);
+            filter: blur(4px);
+        }
+        @keyframes radar81 {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 4. Infinity Loop Animation */
+        .infinity-loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .infinity-loader .infinity-path {
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            animation: infinityDash 1.6s linear infinite;
+        }
+        @keyframes infinityDash {
+            0% { stroke-dashoffset: 220; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        /* 5. Tachometer Gauge Animation */
+        .tacho-loader {
+            display: block;
+            width: 16px;
+            height: 16px;
+        }
+        .tacho__ring-rotate, .tacho__ring-stroke {
+            transform-origin: 50% 50%;
+            transform-box: fill-box;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        .tacho__ring-rotate { animation-name: tachoRingRotate42; }
+        .tacho__ring-stroke { animation-name: tachoRingStroke42; transform: rotate(-45deg); }
+        @keyframes tachoRingRotate42 { from { transform: rotate(0); } to { transform: rotate(720deg); } }
+        @keyframes tachoRingStroke42 {
+            from, to { stroke-dashoffset: 452; transform: rotate(-45deg); }
+            50% { stroke-dashoffset: 169.5; transform: rotate(-180deg); }
+        }
+
+        /* 6. Orbiter Dots Animation */
+        .orbiter-anim {
+            position: relative;
+            width: 16px;
+            height: 16px;
+            animation: orbiterRotate 2s linear infinite;
+        }
+        .orbiter-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #a855f7;
+        }
+        .orbiter-dot.d1 { top: 1px; left: 6px; }
+        .orbiter-dot.d2 { bottom: 1px; left: 6px; }
+        @keyframes orbiterRotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Dynamic Island Showcase (Clean, No Gray Box/Border) */
+        .dynamic-island-showcase {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .dynamic-island-preview {
+            background: #000000;
+            border-radius: 19px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 14px 4px 10px;
+            width: 140px;
+            height: 40px;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .dynamic-island-preview:hover, .dynamic-island-preview.expanded {
+            width: 310px;
+        }
+
+        .island-avatar-preview {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .island-spinner {
+            width: 15px;
+            height: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #38bdf8;
+            border-radius: 50%;
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .island-right-preview {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .island-ctrls-preview {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .dynamic-island-preview:hover .island-ctrls-preview,
+        .dynamic-island-preview.expanded .island-ctrls-preview {
+            display: flex;
+            opacity: 1;
+        }
+
+        .island-btn-mini {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #FFFFFF;
+            border-radius: var(--radius-pill);
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .island-btn-mini:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .island-timer-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #38bdf8;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Banner CTA */
+        .download-banner {
+            max-width: 1140px;
+            margin: 0 auto 80px;
+            padding: 48px 44px;
+            background: #18181B;
+            color: #FFFFFF;
+            border-radius: var(--radius-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-dark);
+        }
+
+        .download-banner-text {
+            flex: 1;
+        }
+
+        .download-banner h2 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 6px;
+        }
+
+        .download-banner p {
+            color: #A1A1AA;
+            font-size: 15px;
+            max-width: 480px;
+        }
+
+        .download-banner-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn-banner-download {
+            background: #FFFFFF;
+            color: #000000;
+            border: 1px solid #FFFFFF;
+        }
+
+        .btn-banner-download:hover {
+            background: #F4F4F6;
+            transform: translateY(-2px);
+        }
+
+        .btn-banner-github {
+            background: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-banner-github:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 48px 44px;
+            background: #111015;
+            color: #FFFFFF;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            border-top: 1px solid #27272A;
+        }
+
+        .footer-logo {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .footer-desc {
+            opacity: 0.65;
+            max-width: 320px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+            opacity: 0.45;
+            color: #A1A1AA;
+        }
+
+        .footer-list li {
+            margin-bottom: 10px;
+        }
+
+        .footer-list a {
+            color: #E4E4E7;
+            text-decoration: none;
+            font-size: 13px;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-list a:hover {
+            opacity: 1;
+            color: #38bdf8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            nav {
+                padding: 14px 20px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero {
+                padding: 110px 20px 48px;
+            }
+            h1 {
+                font-size: 38px;
+            }
+            .hero p {
+                font-size: 16px;
+                margin-bottom: 28px;
+            }
+            .features {
+                grid-template-columns: 1fr;
+                padding: 16px 16px 48px;
+            }
+            .card {
+                padding: 28px 24px;
+                text-align: left;
+                align-items: flex-start;
+            }
+            .card p {
+                margin: 0;
+            }
+            .card-full {
+                grid-column: span 1;
+                flex-direction: column;
+                gap: 24px;
+                text-align: left;
+                align-items: flex-start;
+            }
+            .card-full p {
+                margin: 0;
+            }
+            .sound-chip-grid, .anim-showcase-grid {
+                justify-content: flex-start;
+            }
+            .download-banner {
+                flex-direction: column;
+                padding: 36px 24px;
+                text-align: left;
+                align-items: flex-start;
+                gap: 24px;
+                margin: 0 16px 48px;
+            }
+            .download-banner-text {
+                text-align: left;
+            }
+            .download-banner-text p {
+                margin: 0;
+            }
+            .download-banner-actions {
+                justify-content: flex-start;
+                width: 100%;
+            }
+            footer {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 40px 20px 30px;
+                text-align: left;
+            }
+            .footer-logo {
+                justify-content: flex-start;
+            }
+            .footer-desc {
+                margin: 0;
+            }
+            .footer-list {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 12px 16px;
+            }
+            .logo {
+                font-size: 17px;
+                gap: 8px;
+            }
+            .logo-img {
+                width: 22px;
+                height: 22px;
+            }
+            .hero {
+                padding: 95px 16px 36px;
+            }
+            .hero-app-icon {
+                width: 56px;
+                height: 56px;
+            }
+            .tagline {
+                font-size: 11px;
+                padding: 5px 12px;
+                margin-bottom: 16px;
+            }
+            h1 {
+                font-size: 30px;
+                line-height: 1.2;
+                margin-bottom: 14px;
+            }
+            .hero p {
+                font-size: 14.5px;
+                line-height: 1.5;
+                margin-bottom: 24px;
+            }
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+                gap: 10px;
+            }
+            .download-dropdown-wrapper {
+                width: 100%;
+            }
+            .btn-download-split {
+                width: 100%;
+                display: flex;
+            }
+            .download-main-action {
+                flex: 1;
+                justify-content: center;
+                font-size: 14px;
+                padding: 11px 16px;
+            }
+            .download-caret-btn {
+                padding: 11px 13px;
+            }
+            .download-menu {
+                width: 100%;
+            }
+            .cta-group .btn-secondary {
+                width: 100%;
+                justify-content: center;
+                font-size: 14px;
+                padding: 11px 16px;
+            }
+            .features {
+                padding: 10px 14px 36px;
+                gap: 14px;
+            }
+            .card {
+                padding: 22px 18px;
+                text-align: left;
+                align-items: flex-start;
+            }
+            .card h3 {
+                font-size: 20px;
+                text-align: left;
+            }
+            .card p {
+                font-size: 13.5px;
+                text-align: left;
+                margin: 0;
+            }
+            .sound-chip {
+                padding: 6px 12px;
+                font-size: 11.5px;
+            }
+            .sound-chip-grid, .anim-showcase-grid {
+                justify-content: flex-start;
+            }
+            .dynamic-island-showcase {
+                justify-content: flex-start;
+                width: 100%;
+            }
+            .dynamic-island-preview:hover,
+            .dynamic-island-preview.expanded {
+                width: 290px;
+            }
+            .anim-pill {
+                padding: 6px 12px 6px 8px;
+                font-size: 12px;
+            }
+            .download-banner {
+                margin: 0 14px 36px;
+                padding: 28px 18px;
+                gap: 18px;
+                text-align: left;
+                align-items: flex-start;
+            }
+            .download-banner h2 {
+                font-size: 22px;
+                line-height: 1.25;
+                text-align: left;
+            }
+            .download-banner p {
+                font-size: 13.5px;
+                text-align: left;
+                margin: 0;
+            }
+            .download-banner-actions {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 0;
+                gap: 10px;
+            }
+            .download-banner-actions .btn {
+                width: 100%;
+                justify-content: center;
+                font-size: 13.5px;
+                padding: 11px 16px;
+            }
+            footer {
+                padding: 36px 16px 24px;
+                gap: 28px;
+                text-align: left;
+            }
+            .footer-logo {
+                font-size: 18px;
+                justify-content: flex-start;
+            }
+            .footer-desc {
+                font-size: 12.5px;
+                line-height: 1.55;
+                margin: 0;
+                text-align: left;
+            }
+            .footer-list {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Navigation Bar -->
+    <nav>
+        <a href="#" class="logo">
+            <img src="assets/icon.png" alt="Visara" class="logo-img" onerror="this.style.display='none'">
+            <span>Visara</span>
+        </a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#audio">Chimes</a>
+            <a href="#island">Dynamic Island</a>
+            <a href="https://github.com/Skandan-V/VISARA" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="nav-actions">
+            <a href="https://github.com/Skandan-V/VISARA/releases" class="btn btn-primary" id="navDownloadBtn" style="padding: 8px 18px; font-size: 13px;">
+                Download v1.0.0
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-logo-container">
+            <img src="assets/icon.png" alt="Visara App Icon" class="hero-app-icon">
+        </div>
+        <span class="tagline">
+            <span class="tagline-dot"></span>
+            Open Source Desktop App — v1.0.0
+        </span>
+        <h1>Rest your eyes.<br>Keep your focus.</h1>
+        <p>An intelligent desktop companion for healthy eyes.<br>Automated 20-20-20 timers, calming audio, and floating widgets.</p>
+        
+        <div class="cta-group">
+            <!-- Multi-Platform Download Dropdown -->
+            <div class="download-dropdown-wrapper" id="downloadDropdownWrapper">
+                <div class="btn-download-split">
+                    <a href="https://github.com/Skandan-V/VISARA/releases" class="download-main-action" id="mainDownloadBtn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        <span id="mainDownloadText">Download for Windows</span>
+                    </a>
+                    <button class="download-caret-btn" id="btnToggleDownloadMenu" title="Other Platforms (macOS, Linux)">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                </div>
+                
+                <div class="download-menu" id="downloadMenu">
+                    <a href="https://github.com/Skandan-V/VISARA/releases" class="download-menu-item">
+                        <div class="os-info">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                            <span>Windows</span>
+                        </div>
+                        <span class="os-badge">.exe</span>
+                    </a>
+                    <a href="https://github.com/Skandan-V/VISARA/releases" class="download-menu-item">
+                        <div class="os-info">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"></path><path d="M10 2c1 .5 2 2 2 5"></path></svg>
+                            <span>macOS</span>
+                        </div>
+                        <span class="os-badge">.dmg</span>
+                    </a>
+                    <a href="https://github.com/Skandan-V/VISARA/releases" class="download-menu-item">
+                        <div class="os-info">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path></svg>
+                            <span>Linux</span>
+                        </div>
+                        <span class="os-badge">.AppImage</span>
+                    </a>
+                    <a href="https://github.com/Skandan-V/VISARA" target="_blank" rel="noopener" class="download-menu-item">
+                        <div class="os-info">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            <span>Source Code</span>
+                        </div>
+                        <span class="os-badge">GitHub</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="https://github.com/Skandan-V/VISARA" target="_blank" rel="noopener" class="btn btn-secondary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                GitHub Repository
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Grid (Compact, Content-Hugging Cards - No Single Icons) -->
+    <section class="features" id="features">
+        
+        <!-- Card 1: 20-20-20 Rule -->
+        <div class="card">
+            <h3>The 20-20-20 Rule</h3>
+            <p>Every 20 minutes of work, take 20 seconds to gaze at an object 20 feet away. Visara automates your work intervals and guides healthy eye recovery breaks.</p>
+        </div>
+
+        <!-- Card 2: Procedural Web Audio (With Clean SVG Icons) -->
+        <div class="card" id="audio">
+            <h3>Procedural Audio</h3>
+            <p>Synthesizes peaceful harmonic chimes on the fly using Web Audio. Zero external audio files, pure calming acoustics.</p>
+            
+            <div class="sound-chip-grid">
+                <button class="sound-chip" data-tone="chime">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    <span>Gentle Chime</span>
+                </button>
+                <button class="sound-chip" data-tone="bowl">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
+                    <span>Tibetan Bowl</span>
+                </button>
+                <button class="sound-chip" data-tone="marimba">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"></rect><line x1="8" y1="4" x2="8" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line><line x1="16" y1="4" x2="16" y2="20"></line></svg>
+                    <span>Marimba</span>
+                </button>
+                <button class="sound-chip" data-tone="zen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <span>Zen Bell</span>
+                </button>
+                <button class="sound-chip" data-tone="water">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                    <span>Water Drop</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Card 3: Dynamic Island PIP Overlay (Full Width - Clean, No Gray Container) -->
+        <div class="card card-full" id="island">
+            <div style="flex: 1.2;">
+                <h3>Dynamic Island Floating HUD</h3>
+                <p>A transparent widget that stays on top of your screen. Stay aware of your timer without disrupting your creative flow.</p>
+            </div>
+            <div class="dynamic-island-showcase">
+                <div class="dynamic-island-preview" id="islandDemo" title="Hover or Click to Expand">
+                    <div class="island-avatar-preview">
+                        <div class="island-spinner"></div>
+                    </div>
+                    <div class="island-right-preview">
+                        <div class="island-ctrls-preview">
+                            <button class="island-btn-mini" id="islandBtnAdd5" title="Add +5m">+5m</button>
+                            <button class="island-btn-mini" id="islandBtnRest" title="Rest Now">Rest</button>
+                        </div>
+                        <span class="island-timer-text" id="islandDemoTimer">20:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4: Custom Island Themes & Real App Animations (Full Width Pill Grid) -->
+        <div class="card card-full" id="customization">
+            <div style="flex: 1.05;">
+                <h3>14+ Animated Loaders</h3>
+                <p>Personalize your floating HUD with live animated loaders directly integrated into the Dynamic Island widget.</p>
+            </div>
+            <div style="flex: 1.35; width: 100%;">
+                <div class="anim-showcase-grid">
+                    
+                    <!-- Pill 1: Compass Gyro Loader -->
+                    <div class="anim-pill">
+                        <div class="anim-pill-badge">
+                            <svg class="pl-loader" viewBox="0 0 160 160" width="16" height="16">
+                                <g class="pl__ring-rotate">
+                                    <circle class="pl__ring-stroke" cx="80" cy="80" r="72" fill="none" stroke="#38bdf8" stroke-width="16" stroke-dasharray="452.39 452.39" stroke-dashoffset="452" stroke-linecap="round" transform="rotate(-45,80,80)" />
+                                </g>
+                            </svg>
+                        </div>
+                        <span>Compass Gyro</span>
+                    </div>
+
+                    <!-- Pill 2: Pulse Wave Loader -->
+                    <div class="anim-pill">
+                        <div class="anim-pill-badge">
+                            <div class="pulse-wave-anim">
+                                <div class="pulse-ring"></div>
+                                <div class="pulse-core"></div>
+                            </div>
+                        </div>
+                        <span>Pulse Wave</span>
+                    </div>
+
+                    <!-- Pill 3: Radar Sweep Loader -->
+                    <div class="anim-pill">
+                        <div class="anim-pill-badge">
+                            <div class="radar-loader">
+                                <span></span>
+                            </div>
+                        </div>
+                        <span>Radar Sweep</span>
+                    </div>
+
+                    <!-- Pill 4: Infinity Loop Loader -->
+                    <div class="anim-pill">
+                        <div class="anim-pill-badge">
+                            <div class="infinity-loader">
+                                <svg viewBox="0 0 100 50" width="18" height="10" class="infinity-svg">
+                                    <path stroke="#ec4899" stroke-width="10" fill="none" stroke-linecap="round" d="M 20,25 C 20,10 40,10 50,25 C 60,40 80,40 80,25 C 80,10 60,10 50,25 C 40,40 20,40 20,25 Z" class="infinity-path" />
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Infinity Loop</span>
+                    </div>
+
+                    <!-- Pill 5: Tachometer Gauge Loader -->
+                    <div class="anim-pill">
+                        <div class="anim-pill-badge">
+                            <svg class="tacho-loader" viewBox="0 0 160 160" width="16" height="16">
+                                <g class="tacho__ring-rotate">
+                                    <circle class="tacho__ring-stroke" cx="80" cy="80" r="72" fill="none" stroke="#00b4d8" stroke-width="16" stroke-dasharray="452.39 452.39" stroke-dashoffset="452" stroke-linecap="round" transform="rotate(-45,80,80)"></circle>
+                                </g>
+                            </svg>
+                        </div>
+                        <span>Tachometer</span>
+                    </div>
+
+                    <!-- Pill 6: Orbiter Dots Loader -->
+                    <div class="anim-pill">
+                        <div class="anim-pill-badge">
+                            <div class="orbiter-anim">
+                                <div class="orbiter-dot d1"></div>
+                                <div class="orbiter-dot d2"></div>
+                            </div>
+                        </div>
+                        <span>Orbiter Dots</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5: Guided Exercises -->
+        <div class="card">
+            <h3>4-Step Ocular Exercises</h3>
+            <p>Interactive animated routines for Circular Eye Rolling, Horizontal & Vertical Tracking, and Gentle Blinking to lubricate dry eyes.</p>
+        </div>
+
+        <!-- Card 6: Open Source & 100% Offline -->
+        <div class="card">
+            <h3>100% Offline & Open Source</h3>
+            <p>MIT Licensed. Your settings, session times, and streaks never leave your computer. Pure local execution with zero trackers.</p>
+        </div>
+
+    </section>
+
+    <!-- Bottom Download Banner -->
+    <div class="download-banner">
+        <div class="download-banner-text">
+            <h2>Protect your vision today.</h2>
+            <p>Download Visara for Windows, macOS, or Linux. Free, open-source, and designed for deep work.</p>
+        </div>
+        <div class="download-banner-actions">
+            <a href="https://github.com/Skandan-V/VISARA/releases" class="btn btn-secondary btn-banner-download" id="bannerDownloadBtn">
+                Download (.exe)
+            </a>
+            <a href="https://github.com/Skandan-V/VISARA" target="_blank" rel="noopener" class="btn btn-secondary btn-banner-github">
+                View on GitHub
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            <a href="#" class="footer-logo">
+                <img src="assets/icon.png" alt="Visara" style="width: 22px; height: 22px; border-radius: 6px;" onerror="this.style.display='none'">
+                <span>Visara</span>
+            </a>
+            <p class="footer-desc">The open-source desktop eye wellness assistant designed to prevent digital eye strain through automated 20-20-20 timers, procedural soundscapes, and floating dynamic overlays.</p>
+            <p style="font-size: 13px; opacity: 0.45; margin-top: 22px;">Copyright © 2026 Skandan V. MIT License.</p>
+        </div>
+        <ul class="footer-list">
+            <h4>Application</h4>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#audio">Harmonic Chimes</a></li>
+            <li><a href="#island">Dynamic Island</a></li>
+            <li><a href="https://github.com/Skandan-V/VISARA/releases">Releases</a></li>
+        </ul>
+        <ul class="footer-list">
+            <h4>Community & Open Source</h4>
+            <li><a href="https://github.com/Skandan-V/VISARA" target="_blank" rel="noopener">GitHub Repository</a></li>
+            <li><a href="https://github.com/Skandan-V/VISARA/issues" target="_blank" rel="noopener">Issue Tracker</a></li>
+            <li><a href="https://forms.gle/vU2kMukjDGvUPwtB8" target="_blank" rel="noopener">Suggest a Feature</a></li>
+            <li><a href="https://github.com/Skandan-V/VISARA/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+        </ul>
+    </footer>
+
+    <!-- Interactive Scripts: Web Audio Synthesizer, Dynamic Island & Download Dropdown -->
+    <script>
+        // Automatic Platform / OS Detection
+        function detectUserPlatform() {
+            const userAgent = window.navigator.userAgent || "";
+            const platform = window.navigator.platform || "";
+            
+            let osName = "Windows";
+            let extension = ".exe";
+            
+            if (/Mac|iPhone|iPod|iPad/i.test(platform) || /Macintosh|Mac OS X/i.test(userAgent)) {
+                osName = "macOS";
+                extension = ".dmg";
+            } else if (/Linux/i.test(platform) || /Linux/i.test(userAgent)) {
+                osName = "Linux";
+                extension = ".AppImage";
+            }
+            
+            return { osName, extension };
+        }
+
+        // Apply Detected Platform to Download Buttons
+        const detected = detectUserPlatform();
+        const mainDownloadText = document.getElementById('mainDownloadText');
+        const bannerDownloadBtn = document.getElementById('bannerDownloadBtn');
+        const navDownloadBtn = document.getElementById('navDownloadBtn');
+
+        if (mainDownloadText) {
+            mainDownloadText.innerText = `Download for ${detected.osName}`;
+        }
+        if (bannerDownloadBtn) {
+            bannerDownloadBtn.innerText = `Download for ${detected.osName} (${detected.extension})`;
+        }
+        if (navDownloadBtn) {
+            navDownloadBtn.innerText = `Download (${detected.osName})`;
+        }
+
+        // Web Audio API Synthesizer (Exact procedural formulas from Visara)
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) audioCtx = new AudioContext();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playSoundTone(tone) {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+
+            if (tone === 'chime') {
+                playChimeTone(ctx, 1046.50, now, 0.6, 0.15);
+                playChimeTone(ctx, 1318.51, now + 0.12, 0.8, 0.18);
+            } else if (tone === 'bowl') {
+                playChimeTone(ctx, 216.0, now, 2.2, 0.22);
+                playChimeTone(ctx, 432.0, now, 1.8, 0.12);
+            } else if (tone === 'marimba') {
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                    playChimeTone(ctx, freq, now + i * 0.08, 0.35, 0.16);
+                });
+            } else if (tone === 'zen') {
+                playChimeTone(ctx, 880.0, now, 1.8, 0.18);
+                playChimeTone(ctx, 1760.0, now + 0.05, 1.2, 0.08);
+            } else if (tone === 'water') {
+                playChimeTone(ctx, 600.0, now, 0.25, 0.18);
+                playChimeTone(ctx, 1200.0, now + 0.08, 0.3, 0.15);
+            }
+        }
+
+        function playChimeTone(ctx, freq, startTime, duration, gainVal) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(gainVal, startTime + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + duration + 0.05);
+        }
+
+        // Sound Chip Click Handlers
+        document.querySelectorAll('.sound-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.sound-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                playSoundTone(chip.dataset.tone);
+            });
+        });
+
+        // Dynamic Island Interactive Demo
+        const islandDemo = document.getElementById('islandDemo');
+        const islandBtnAdd5 = document.getElementById('islandBtnAdd5');
+        const islandBtnRest = document.getElementById('islandBtnRest');
+        const islandDemoTimer = document.getElementById('islandDemoTimer');
+        let currentSeconds = 20 * 60;
+        let isRestMode = false;
+
+        if (islandBtnAdd5) {
+            islandBtnAdd5.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentSeconds += 5 * 60;
+                updateIslandTimerText();
+                playSoundTone('water');
+            });
+        }
+
+        if (islandBtnRest) {
+            islandBtnRest.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isRestMode = !isRestMode;
+                currentSeconds = isRestMode ? 20 : 20 * 60;
+                islandDemoTimer.style.color = isRestMode ? '#34c759' : '#38bdf8';
+                islandBtnRest.innerText = isRestMode ? 'Work' : 'Rest';
+                updateIslandTimerText();
+                playSoundTone(isRestMode ? 'zen' : 'chime');
+            });
+        }
+
+        function updateIslandTimerText() {
+            const mins = Math.floor(currentSeconds / 60);
+            const secs = currentSeconds % 60;
+            islandDemoTimer.innerText = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        // Multi-Platform Download Dropdown Toggle
+        const btnToggleDownloadMenu = document.getElementById('btnToggleDownloadMenu');
+        const downloadMenu = document.getElementById('downloadMenu');
+
+        if (btnToggleDownloadMenu && downloadMenu) {
+            btnToggleDownloadMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+                downloadMenu.classList.toggle('show');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!downloadMenu.contains(e.target) && e.target !== btnToggleDownloadMenu) {
+                    downloadMenu.classList.remove('show');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
