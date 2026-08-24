@@ -9,10 +9,14 @@ on:
 permissions:
   contents: write
 
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"
+
 jobs:
-  release:
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
 
@@ -29,45 +33,73 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      # Linux required build libraries
+      # Linux dependencies
       - name: Install Linux AppImage & Build Dependencies
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y libarchive-tools libfuse2
 
-      # Build Multiplatform Artifacts
-      - name: Build Windows Executable
+      # Build Windows
+      - name: Build Windows Executables
         if: runner.os == 'Windows'
         run: npm run dist:win
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: false
 
-      - name: Build macOS DMG
+      # Build macOS
+      - name: Build macOS Binaries
         if: runner.os == 'macOS'
         run: npm run dist:mac
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: false
 
-      - name: Build Linux AppImage
+      # Build Linux
+      - name: Build Linux Packages
         if: runner.os == 'Linux'
         run: npm run dist:linux
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: false
 
-      - name: Upload Binaries to GitHub Release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
+      # Upload Artifacts for Release Job
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
         with:
-          files: |
+          name: binaries-${{ matrix.os }}
+          path: |
             release/*.exe
             release/*.dmg
             release/*.zip
             release/*.AppImage
             release/*.deb
+          if-no-files-found: ignore
+
+  publish-release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download All Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-dist
+          merge-multiple: true
+
+      - name: Publish Binaries to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release-dist/*.exe
+            release-dist/*.dmg
+            release-dist/*.zip
+            release-dist/*.AppImage
+            release-dist/*.deb
           draft: false
           prerelease: false
           generate_release_notes: true
