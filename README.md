@@ -1,116 +1,131 @@
 <div align="center">
-  <img src="assets/icon.png" alt="Visara Logo" width="100" height="100" />
-  <h1>VISARA</h1>
-  <p><strong>Desktop Eye Move Timer & Guided Ocular Wellness Assistant</strong></p>
+  <img src="assets/icon.png" alt="Visara Logo" width="96" height="96" />
+  <h1>Visara</h1>
+  <p><strong>Desktop Eye Rest Timer and Guided Ocular Wellness Assistant</strong></p>
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-  [![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078D6.svg?logo=windows)](https://github.com/Skandan-V/VISARA)
+  [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](https://github.com/Skandan-V/VISARA)
   [![Electron](https://img.shields.io/badge/Electron-31.0.0-47848F.svg?logo=electron)](https://www.electronjs.org/)
-  [![GitHub Repository](https://img.shields.io/badge/GitHub-Skandan--V%2FVISARA-181717.svg?logo=github)](https://github.com/Skandan-V/VISARA)
+  [![GitHub Releases](https://img.shields.io/github/v/release/Skandan-V/VISARA?color=34C759)](https://github.com/Skandan-V/VISARA/releases)
 </div>
 
 ---
 
-## 🌟 Overview
+## Overview
 
-**Visara** is an open-source desktop application designed to prevent digital eye strain, computer vision syndrome (CVS), and fatigue. Built around the clinical **20-20-20 rule**, Visara provides smooth timers, procedural Web Audio harmonic chimes, interactive 4-step guided ocular exercises, and a floating Dynamic Island Picture-in-Picture (PIP) widget.
-
----
-
-## ✨ Features
-
-- ⏱️ **Intelligent 20-20-20 Timer**: Customizable work & rest cycles with visual progress indicators and subtle cycle tracking.
-- 👁️ **Guided 4-Step Eye Exercises**: Interactive animated exercise routines (Far Gaze Focus, Circular Eye Rolling, Horizontal & Vertical Scanning, and Gentle Blinking).
-- 🎵 **Procedural Web Audio Chimes**: 7 built-in synthesizer sound profiles (Gentle Chime, Tibetan Bowl, Marimba Arpeggio, Zen Bell, Water Drop, Soft Harp, and Digital Pip) synthesized directly in real-time with zero external audio assets.
-- 🏝️ **Dynamic Island PIP Mode**: Minimalist transparent floating overlay that stays on top without obstructing your workflow.
-- 📊 **Weekly Activity Tracking**: Real-time weekly eye rest statistics and streak analytics saved locally.
-- 🔒 **100% Privacy & Offline-First**: All settings, stats, and audio are processed locally on your machine.
-- ⌨️ **Global Hotkeys & System Tray**: Control your timers and rest breaks seamlessly from anywhere in Windows.
+**Visara** is an open-source desktop application designed to prevent digital eye strain and computer vision syndrome (CVS). Built around the clinically validated **20-20-20 rule**, Visara provides non-intrusive timers, procedural Web Audio acoustic chimes, interactive 4-step guided ocular exercises, and an OLED-styled floating Dynamic Island Picture-in-Picture (PIP) widget.
 
 ---
 
-## 📦 Download & Installation
+## Features
 
-### Windows Installer (Recommended)
-Download the latest signed release from the [Releases](https://github.com/Skandan-V/VISARA/releases) page:
-- **`Visara Setup 1.0.0.exe`**: Complete Windows installer with desktop and start menu shortcuts.
-- **`Visara 1.0.0.exe`**: Portable standalone executable that runs without installation.
+- **Automated 20-20-20 Intervals**: Configurable work and rest cycles with visual countdown progress and background micro-rest scheduling.
+- **Procedural Acoustic Synthesis**: Real-time synthesized chimes (Gentle Chime, Tibetan Bowl, Marimba, Zen Bell, Water Drop) powered by the native Web Audio API with zero external audio assets.
+- **Dynamic Island HUD**: Minimalist always-on-top transparent widget with live status indicators, timer controls, and 14+ customizable animated loaders.
+- **Guided Ocular Exercises**: Interactive animated routines covering Circular Eye Rolling, Horizontal and Vertical Saccadic Tracking, and Lubricating Blink intervals.
+- **100% Offline and Private**: All settings, timers, and activity streaks are processed and stored strictly locally on your machine with zero telemetry.
+- **Global Hotkeys and System Tray**: Manage rest cycles and timer modes seamlessly in the background.
 
 ---
 
-## 🛠️ Development & Building from Source
+## Download and Installation
+
+### Pre-Built Binaries
+
+Pre-compiled binaries for Windows, macOS, and Linux are available on the [Releases](https://github.com/Skandan-V/VISARA/releases) page.
+
+| Operating System | Package Format | Description |
+| :--- | :--- | :--- |
+| **Windows** | `.exe` (NSIS) | Complete installer with custom path configuration and desktop shortcuts |
+| **Windows** | `.exe` (Portable) | Standalone executable requiring no installation |
+| **macOS** | `.dmg` / `.zip` | Universal disk image for Apple Silicon and Intel Macs |
+| **Linux** | `.AppImage` / `.deb` | Portable AppImage and Debian package |
+
+---
+
+## Building from Source
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended)
+
+- [Node.js](https://nodejs.org/) (v18.0.0 or higher)
 - [npm](https://www.npmjs.com/)
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/Skandan-V/VISARA.git
 cd VISARA
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
-### 3. Run in Development Mode
+### 3. Run Locally
+
 ```bash
 npm start
 ```
 
-### 4. Build Signed Windows Executable & Installer
+### 4. Build Distribution Packages
+
 ```bash
+# Build for current OS
 npm run dist
+
+# Specific OS targets
+npm run dist:win
+npm run dist:mac
+npm run dist:linux
 ```
-Compiled binaries will be generated inside the `release/` directory.
+
+Compiled binaries will be generated in the `release/` directory.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 VISARA/
-├── assets/                  # High-resolution logos, icons, and Windows .ico assets
+├── .github/workflows/       # GitHub Actions CI/CD and Pages deployment
+├── assets/                  # Application icons and branding assets
 ├── src/
-│   ├── renderer/            # Electron renderer UI components
-│   │   ├── index.html       # Main dashboard window
-│   │   ├── style.css        # Minimalist dashboard styles
-│   │   ├── app.js           # Dashboard controller & state manager
-│   │   ├── exercise.html    # Guided eye exercise window
-│   │   ├── exercise.css     # Exercise animations & styling
-│   │   ├── exercise.js      # Step-by-step ocular exercise engine
-│   │   ├── island.html      # Dynamic Island PIP widget
-│   │   └── island.js        # PIP window controller
-│   ├── audio.js             # Web Audio procedural harmonic synthesizer
-│   ├── store.js             # Local JSON settings & stats store
-│   └── services/            # Firebase auth & telemetry services
-├── main.js                  # Electron main process & window lifecycle
+│   ├── renderer/            # User interface and dashboard windows
+│   │   ├── animations/      # CSS loaders and HUD animation styles
+│   │   ├── index.html       # Main application window
+│   │   ├── customization.html # Dynamic Island customization view
+│   │   ├── exercise.html    # Guided ocular exercise view
+│   │   └── island.html      # Floating Dynamic Island widget
+│   ├── audio.js             # Procedural Web Audio synthesizer
+│   ├── store.js             # Local preferences and streak storage
+│   └── services/            # Client authentication and services
+├── index.html               # Project marketing website (GitHub Pages)
+├── installer.nsh            # Custom NSIS Windows installer script
+├── main.js                  # Electron main process and lifecycle manager
 ├── preload.js               # Secure IPC context bridge
-├── installer.nsh            # Custom NSIS installer script
-├── package.json             # Project configuration & build scripts
-├── LICENSE                  # MIT Open Source License
+├── package.json             # Build configuration and scripts
+├── LICENSE                  # MIT License
 └── README.md                # Project documentation
 ```
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-Contributions, issues, and feature requests are welcome!
-Feel free to check out the [Issues page](https://github.com/Skandan-V/VISARA/issues) or submit a feature idea via our in-app suggestion link.
+Contributions, bug reports, and suggestions are welcome.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+1. Fork the repository
+2. Create your branch (`git checkout -b feature/NewFeature`)
+3. Commit your changes (`git commit -m 'feat: add NewFeature'`)
+4. Push to the branch (`git push origin feature/NewFeature`)
 5. Open a Pull Request
 
 ---
 
-## 📄 License
+## License
 
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 Copyright (c) 2026 **Skandan V** ([@Skandan-V](https://github.com/Skandan-V))
